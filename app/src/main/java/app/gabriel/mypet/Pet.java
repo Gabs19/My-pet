@@ -2,13 +2,18 @@ package app.gabriel.mypet;
 
 public class Pet {
 
+
     private String name;
     private int age;
     private double weight;
     private int Hapyness;
-    private boolean live;
+    private int id;
+//    private boolean live;
 
     public Pet () {
+        this.weight = 50;
+        this.age = 1;
+        this.Hapyness = 25;
     }
 
     public String getName () {
@@ -40,14 +45,23 @@ public class Pet {
     }
 
     public void setHapyness (int hapyness) {
-        Hapyness = hapyness;
+        this.Hapyness = hapyness;
     }
 
-    public boolean isLive () {
-        return live;
+    public int getId () {
+        return id;
     }
 
-    public void setLive (boolean live) {
-        this.live = live;
+    public void setId (int id) {
+        this.id = id;
     }
+
+    //
+//    public boolean isLive () {
+//        return live;
+//    }
+//
+//    public void setLive (boolean live) {
+//        this.live = live;
+//    }
 }
