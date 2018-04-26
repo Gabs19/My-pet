@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         weight = ( TextView ) findViewById ( R.id.weight );
-        weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( game.getFloat ( "weight" , pet.getWeight () ) + "/kg" ) ) );
+        weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( game.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
 
         happyness = ( TextView ) findViewById ( R.id.feeling );
         happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + game.getInt ( "hapyness" , pet.getHapyness () ) ) );
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 food_editor.commit ();
 
                 happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + food.getInt ( "hapyness" , pet.getHapyness () ) ) );
-                weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( food.getFloat ( "weight" , pet.getWeight () ) + "/kg" ) ) );
+                weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( food.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
 
 
             }
@@ -120,13 +120,14 @@ public class MainActivity extends AppCompatActivity {
 
                 happy_Editor.putInt ( "hapyness" , pet.getHapyness () );
 
-                happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + happy.getInt ( "hapyness" , pet.getHapyness () ) ) );
+
 
                 if ( happy.getFloat ( "weight" , pet.getWeight () ) > 0 ) {
                     pet.setWeight ( pet.getWeight () / half );
                     happy_Editor.putFloat ( "weight" , pet.getWeight () );
 
-                    weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( happy.getFloat ( "weight" , pet.getWeight () ) + "/kg" ) ) );
+                    happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + happy.getInt ( "hapyness" , pet.getHapyness () ) ) );
+                    weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( happy.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
 
                 }
 

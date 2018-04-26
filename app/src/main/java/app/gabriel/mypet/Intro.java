@@ -33,7 +33,7 @@ public class Intro extends AppCompatActivity {
                 pet.setName ( name.getEditText ().getText ().toString ().trim () );
 
                 if ( pet.getName () == null ) {
-                    Toast.makeText ( Intro.this , "Mano da um nome ao seu pet > " + pet.getName () , Toast.LENGTH_SHORT ).show ();
+                    Toast.makeText ( Intro.this , "Mano da um nome ao seu pet > ", Toast.LENGTH_SHORT ).show ();
 
                 }
                 else {
@@ -46,6 +46,7 @@ public class Intro extends AppCompatActivity {
 //                    Toast.makeText ( Intro.this,"Seu pet Não foi criado, adicione um nome",Toast.LENGTH_SHORT ).show ();
                     Intent game = new Intent ( Intro.this , MainActivity.class );
                     startActivity ( game );
+                    finish ();
                 }
             }
         } );
