@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -24,6 +25,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity{
+    private static final String PREF_NAME = "PetPreferences";
+
 
     private ImageButton btnFodd;
     private ImageButton btnSpleep;
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity{
     private TextView age;
     private TextView happyness;
     private TextView weight;
-
     private TextView name;
 
     Pet pet = new Pet();
@@ -47,17 +49,21 @@ public class MainActivity extends AppCompatActivity{
             super.onCreate ( savedInstanceState );
             setContentView ( R.layout.activity_main );
 
+            SharedPreferences game = getSharedPreferences ( PREF_NAME,MODE_PRIVATE );
+
+
             name = (TextView ) findViewById ( R.id.name );
-            name.setText ("Nome do seu pet:" + pet.getName ());
+            name.setText( game.getString ( "name",pet.getName () ));
 
             age = ( TextView ) findViewById ( R.id.age );
-            age.setText ( String.valueOf ( "Idade do Pet : " + pet.getAge () ) );
+            age.setText ( String.valueOf ( "Idade do seu pet : " + game.getInt ( "age",  pet.getAge () ) ) );
+
 
             weight = ( TextView ) findViewById ( R.id.weight );
-            weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( pet.getWeight () ) + "/kg" ) );
+            weight.setText ( String.valueOf ( "Seu pet Pesa : " +  formatD.format ( game.getFloat ( "weight", pet.getWeight () ) + "/kg" ) ) );
 
             happyness = ( TextView ) findViewById ( R.id.feeling );
-            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + pet.getHapyness () ) );
+            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + game.getInt ("hapyness",  pet.getHapyness () ) ) );
 
     /*PS - dormir, brincar e comer aumentam a felicidade*/
 
@@ -67,12 +73,24 @@ public class MainActivity extends AppCompatActivity{
         btnFodd.setOnClickListener ( new View.OnClickListener () {
         @Override
         public void onClick (View v) {
-            pet.setWeight ( pet.getWeight () + 5 );
-            pet.setHapyness ( pet.getHapyness () + 1 );
-            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + pet.getHapyness () ) );
-            weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( pet.getWeight () ) + "/kg" ) );
 
-            Toast.makeText ( MainActivity.this,pet.getName (),Toast.LENGTH_SHORT ).show ();
+            SharedPreferences food = getSharedPreferences ( PREF_NAME,MODE_PRIVATE );
+            SharedPreferences.Editor food_editor = food.edit ();
+
+
+            pet.setWeight ( pet.getWeight () + 5 );
+            food_editor.putFloat ( "weight",pet.getWeight());
+
+
+            pet.setHapyness ( pet.getHapyness () + 1 );
+            food_editor.putInt ("hapyness", pet.getHapyness ());
+
+            food_editor.commit ();
+
+            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + food.getInt ("hapyness",  pet.getHapyness () ) ) );
+            weight.setText ( String.valueOf ( "Seu pet Pesa : " +  formatD.format ( food.getFloat ( "weight", pet.getWeight () ) + "/kg" ) ) );
+
+
         }
     } );
 
@@ -93,14 +111,26 @@ public class MainActivity extends AppCompatActivity{
         btnGame.setOnClickListener ( new View.OnClickListener () {
         @Override
         public void onClick (View v) {
-            double half = 1.5;
             pet.setHapyness ( pet.getHapyness () + 1 );
-            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + pet.getHapyness () ) );
-            if ( pet.getWeight () > 0 ) {
+
+            float half = ( float ) 1.5;
+
+            SharedPreferences happy = getSharedPreferences ( PREF_NAME,MODE_PRIVATE );
+            SharedPreferences.Editor happy_Editor = happy.edit ();
+
+            happy_Editor.putInt ("hapyness", pet.getHapyness ());
+
+            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + happy.getInt ("hapyness",  pet.getHapyness () ) ) );
+
+            if ( happy.getFloat ("weight",  pet.getWeight ()) > 0 ) {
                 pet.setWeight ( pet.getWeight () / half );
-                weight.setText ( String.valueOf ( String.format ( "Seu pet Pesa : " + formatD.format ( pet.getWeight () ) + "/kg" ) ) );
+                happy_Editor.putFloat ("weight", pet.getWeight () );
+
+                weight.setText ( String.valueOf ( "Seu pet Pesa : " +  formatD.format ( happy.getFloat ( "weight", pet.getWeight () ) + "/kg" ) ) );
 
                 }
+
+                happy_Editor.apply ();
             }
         } );
 

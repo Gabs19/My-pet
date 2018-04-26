@@ -5,7 +5,7 @@ public class Pet {
 
     private String name;
     private int age;
-    private double weight;
+    private float weight;
     private int Hapyness;
     private int id;
 //    private boolean live;
@@ -32,11 +32,11 @@ public class Pet {
         this.age = age;
     }
 
-    public double getWeight () {
+    public float getWeight () {
         return weight;
     }
 
-    public void setWeight (double weight) {
+    public void setWeight (float weight) {
         this.weight = weight;
     }
 
