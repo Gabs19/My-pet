@@ -24,7 +24,7 @@ import java.text.NumberFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
     private static final String PREF_NAME = "PetPreferences";
 
 
@@ -37,96 +37,96 @@ public class MainActivity extends AppCompatActivity{
     private TextView weight;
     private TextView name;
 
-    Pet pet = new Pet();
+    Pet pet = new Pet ();
 
-    NumberFormat formatD = new DecimalFormat ( "0.2");
+    NumberFormat formatD = new DecimalFormat ( "0.2" );
 
-    Timer time_sad = new Timer();
-    Timer time_hungry = new Timer();
+    Timer time_sad = new Timer ();
+    Timer time_hungry = new Timer ();
 
     @Override
-        protected void onCreate (Bundle savedInstanceState) {
-            super.onCreate ( savedInstanceState );
-            setContentView ( R.layout.activity_main );
+    protected void onCreate (Bundle savedInstanceState) {
+        super.onCreate ( savedInstanceState );
+        setContentView ( R.layout.activity_main );
 
-            SharedPreferences game = getSharedPreferences ( PREF_NAME,MODE_PRIVATE );
-
-
-            name = (TextView ) findViewById ( R.id.name );
-            name.setText( game.getString ( "name",pet.getName () ));
-
-            age = ( TextView ) findViewById ( R.id.age );
-            age.setText ( String.valueOf ( "Idade do seu pet : " + game.getInt ( "age",  pet.getAge () ) ) );
+        SharedPreferences game = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
 
 
-            weight = ( TextView ) findViewById ( R.id.weight );
-            weight.setText ( String.valueOf ( "Seu pet Pesa : " +  formatD.format ( game.getFloat ( "weight", pet.getWeight () ) + "/kg" ) ) );
+        name = ( TextView ) findViewById ( R.id.name );
+        name.setText ( game.getString ( "name" , pet.getName () ) );
 
-            happyness = ( TextView ) findViewById ( R.id.feeling );
-            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + game.getInt ("hapyness",  pet.getHapyness () ) ) );
+        age = ( TextView ) findViewById ( R.id.age );
+        age.setText ( String.valueOf ( "Idade do seu pet : " + game.getInt ( "age" , pet.getAge () ) ) );
 
-    /*PS - dormir, brincar e comer aumentam a felicidade*/
 
-    /* botão que aumenta o peso de acordo com quantidade de comida*/
-    btnFodd = ( ImageButton ) findViewById ( R.id.btn_food );
+        weight = ( TextView ) findViewById ( R.id.weight );
+        weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( game.getFloat ( "weight" , pet.getWeight () ) + "/kg" ) ) );
+
+        happyness = ( TextView ) findViewById ( R.id.feeling );
+        happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + game.getInt ( "hapyness" , pet.getHapyness () ) ) );
+
+        /*PS - dormir, brincar e comer aumentam a felicidade*/
+
+        /* botão que aumenta o peso de acordo com quantidade de comida*/
+        btnFodd = ( ImageButton ) findViewById ( R.id.btn_food );
 
         btnFodd.setOnClickListener ( new View.OnClickListener () {
-        @Override
-        public void onClick (View v) {
+            @Override
+            public void onClick (View v) {
 
-            SharedPreferences food = getSharedPreferences ( PREF_NAME,MODE_PRIVATE );
-            SharedPreferences.Editor food_editor = food.edit ();
-
-
-            pet.setWeight ( pet.getWeight () + 5 );
-            food_editor.putFloat ( "weight",pet.getWeight());
+                SharedPreferences food = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
+                SharedPreferences.Editor food_editor = food.edit ();
 
 
-            pet.setHapyness ( pet.getHapyness () + 1 );
-            food_editor.putInt ("hapyness", pet.getHapyness ());
-
-            food_editor.commit ();
-
-            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + food.getInt ("hapyness",  pet.getHapyness () ) ) );
-            weight.setText ( String.valueOf ( "Seu pet Pesa : " +  formatD.format ( food.getFloat ( "weight", pet.getWeight () ) + "/kg" ) ) );
+                pet.setWeight ( pet.getWeight () + 5 );
+                food_editor.putFloat ( "weight" , pet.getWeight () );
 
 
-        }
-    } );
+                pet.setHapyness ( pet.getHapyness () + 1 );
+                food_editor.putInt ( "hapyness" , pet.getHapyness () );
 
-    /*botão que controla o nivel de sono e felicidade */
-    btnSpleep = ( ImageButton ) findViewById ( R.id.btn_sleep );
+                food_editor.commit ();
+
+                happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + food.getInt ( "hapyness" , pet.getHapyness () ) ) );
+                weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( food.getFloat ( "weight" , pet.getWeight () ) + "/kg" ) ) );
+
+
+            }
+        } );
+
+        /*botão que controla o nivel de sono e felicidade */
+        btnSpleep = ( ImageButton ) findViewById ( R.id.btn_sleep );
 
         btnSpleep.setOnClickListener ( new View.OnClickListener () {
-        @Override
-        public void onClick (View v) {
-            Toast.makeText ( MainActivity.this , "Sem evento" , Toast.LENGTH_SHORT ).show ();
-        }
-    } );
+            @Override
+            public void onClick (View v) {
+                Toast.makeText ( MainActivity.this , "Sem evento" , Toast.LENGTH_SHORT ).show ();
+            }
+        } );
 
-    /* botão que controla a felicidade dependendo das brincadeiras */
+        /* botão que controla a felicidade dependendo das brincadeiras */
 
-    btnGame = ( ImageButton ) findViewById ( R.id.btn_play );
+        btnGame = ( ImageButton ) findViewById ( R.id.btn_play );
 
         btnGame.setOnClickListener ( new View.OnClickListener () {
-        @Override
-        public void onClick (View v) {
-            pet.setHapyness ( pet.getHapyness () + 1 );
+            @Override
+            public void onClick (View v) {
+                pet.setHapyness ( pet.getHapyness () + 1 );
 
-            float half = ( float ) 1.5;
+                float half = ( float ) 1.5;
 
-            SharedPreferences happy = getSharedPreferences ( PREF_NAME,MODE_PRIVATE );
-            SharedPreferences.Editor happy_Editor = happy.edit ();
+                SharedPreferences happy = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
+                SharedPreferences.Editor happy_Editor = happy.edit ();
 
-            happy_Editor.putInt ("hapyness", pet.getHapyness ());
+                happy_Editor.putInt ( "hapyness" , pet.getHapyness () );
 
-            happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + happy.getInt ("hapyness",  pet.getHapyness () ) ) );
+                happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + happy.getInt ( "hapyness" , pet.getHapyness () ) ) );
 
-            if ( happy.getFloat ("weight",  pet.getWeight ()) > 0 ) {
-                pet.setWeight ( pet.getWeight () / half );
-                happy_Editor.putFloat ("weight", pet.getWeight () );
+                if ( happy.getFloat ( "weight" , pet.getWeight () ) > 0 ) {
+                    pet.setWeight ( pet.getWeight () / half );
+                    happy_Editor.putFloat ( "weight" , pet.getWeight () );
 
-                weight.setText ( String.valueOf ( "Seu pet Pesa : " +  formatD.format ( happy.getFloat ( "weight", pet.getWeight () ) + "/kg" ) ) );
+                    weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( happy.getFloat ( "weight" , pet.getWeight () ) + "/kg" ) ) );
 
                 }
 
@@ -139,16 +139,16 @@ public class MainActivity extends AppCompatActivity{
             public void run () {
                 eat ();
             }
-        },0,5000 );
+        } , 0 , 5000 );
 
         time_sad.schedule ( new TimerTask () {
             @Override
             public void run () {
                 play ();
             }
-        } , 0 , 5000);
+        } , 0 , 5000 );
 
-        }
+    }
 
     public void eat () {
         if ( pet.getWeight () < 30 ) {
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void play() {
+    public void play () {
         if ( pet.getHapyness () <= 20 ) {
             NotificationCompat.Builder message = new NotificationCompat.Builder ( this )
                     .setSmallIcon ( R.mipmap.ic_stat_8314___pikachu_512 )

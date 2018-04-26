@@ -16,38 +16,38 @@ public class Intro extends AppCompatActivity {
     private Button btnCreate;
     private TextInputLayout name;
 
-    Pet pet = new Pet();
+    Pet pet = new Pet ();
 
     @Override
     protected void onCreate (Bundle savedInstanceState) {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_intro );
 
-        btnCreate = (Button) findViewById ( R.id.btn_create );
+        btnCreate = ( Button ) findViewById ( R.id.btn_create );
 
-        name = (TextInputLayout ) findViewById ( R.id.input_name );
+        name = ( TextInputLayout ) findViewById ( R.id.input_name );
 
         btnCreate.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick (View v) {
-                    pet.setName (  name.getEditText ().getText ().toString ().trim ());
+                pet.setName ( name.getEditText ().getText ().toString ().trim () );
 
-                    if(pet.getName () == null){
-                        Toast.makeText ( Intro.this,"Mano da um nome ao seu pet > " + pet.getName (),Toast.LENGTH_SHORT ).show ();
+                if ( pet.getName () == null ) {
+                    Toast.makeText ( Intro.this , "Mano da um nome ao seu pet > " + pet.getName () , Toast.LENGTH_SHORT ).show ();
 
-                    }
-                    else {
-                    SharedPreferences intro = getSharedPreferences ( PREF_NAME,MODE_PRIVATE );
+                }
+                else {
+                    SharedPreferences intro = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
                     SharedPreferences.Editor editor = intro.edit ();
 
-                    editor.putString ( "name", pet.getName () );
+                    editor.putString ( "name" , pet.getName () );
                     editor.apply ();
 
 //                    Toast.makeText ( Intro.this,"Seu pet Não foi criado, adicione um nome",Toast.LENGTH_SHORT ).show ();
-                        Intent game = new Intent ( Intro.this , MainActivity.class );
-                        startActivity ( game );
-                    }
+                    Intent game = new Intent ( Intro.this , MainActivity.class );
+                    startActivity ( game );
                 }
-            } );
-        }
+            }
+        } );
     }
+}
