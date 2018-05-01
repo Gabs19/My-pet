@@ -14,7 +14,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="205dp"
-        android:background="@color/colorAccent">
+        >
 
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
@@ -34,12 +34,13 @@
 
     <Button
         android:id="@+id/btn_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="87dp"
-        android:background="@color/colorO.C"
+        android:background="@color/color_create"
+        android:textColor="@color/black"
         android:text="Criando seu PEt" />
 
 

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,13 +25,13 @@ import java.text.NumberFormat;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class Game extends AppCompatActivity {
     private static final String PREF_NAME = "PetPreferences";
 
 
-    private ImageButton btnFodd;
-    private ImageButton btnSpleep;
-    private ImageButton btnGame;
+    private FloatingActionButton btnFodd;
+    private FloatingActionButton btnSpleep;
+    private FloatingActionButton btnGame;
 
     private TextView age;
     private TextView happyness;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         /*PS - dormir, brincar e comer aumentam a felicidade*/
 
         /* botão que aumenta o peso de acordo com quantidade de comida*/
-        btnFodd = ( ImageButton ) findViewById ( R.id.btn_food );
+        btnFodd = ( FloatingActionButton ) findViewById ( R.id.btn_food );
 
         btnFodd.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -95,18 +96,18 @@ public class MainActivity extends AppCompatActivity {
         } );
 
         /*botão que controla o nivel de sono e felicidade */
-        btnSpleep = ( ImageButton ) findViewById ( R.id.btn_sleep );
+        btnSpleep = ( FloatingActionButton ) findViewById ( R.id.btn_sleep );
 
         btnSpleep.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick (View v) {
-                Toast.makeText ( MainActivity.this , "Sem evento" , Toast.LENGTH_SHORT ).show ();
+                Toast.makeText ( Game.this , "Sem evento" , Toast.LENGTH_SHORT ).show ();
             }
         } );
 
         /* botão que controla a felicidade dependendo das brincadeiras */
 
-        btnGame = ( ImageButton ) findViewById ( R.id.btn_play );
+        btnGame = ( FloatingActionButton ) findViewById ( R.id.btn_play );
 
         btnGame.setOnClickListener ( new View.OnClickListener () {
             @Override
@@ -158,9 +159,9 @@ public class MainActivity extends AppCompatActivity {
                     .setContentTitle ( "Estou com fome! :(" )
                     .setContentText ( "Alimente seu pet" );
 
-            Intent intent = new Intent ( this , MainActivity.class );
+            Intent intent = new Intent ( this , Game.class );
             TaskStackBuilder stackBuilder = TaskStackBuilder.create ( this );
-            stackBuilder.addParentStack ( MainActivity.class );
+            stackBuilder.addParentStack ( Game.class );
             stackBuilder.addNextIntent ( intent );
 
 
@@ -189,9 +190,9 @@ public class MainActivity extends AppCompatActivity {
                     .setContentTitle ( "Estou infeliz! :(" )
                     .setContentText ( "Brinque um pouco com seu pet" );
 
-            Intent intent = new Intent ( this , MainActivity.class );
+            Intent intent = new Intent ( this , Game.class );
             TaskStackBuilder stackBuilder = TaskStackBuilder.create ( this );
-            stackBuilder.addParentStack ( MainActivity.class );
+            stackBuilder.addParentStack ( Game.class );
             stackBuilder.addNextIntent ( intent );
 
 

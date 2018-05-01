@@ -5,9 +5,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SplashIntro"
-   >
+    tools:context=".SplashIntro" >
 
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/gifImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:src=""
+        android:layout_alignParentTop="true" />
 
     <ProgressBar
         android:id="@+id/rodinha"
@@ -17,4 +23,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="88dp" />
+
 </RelativeLayout>

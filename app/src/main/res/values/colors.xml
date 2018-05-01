@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryDark">#e0e0e0</color>
     <color name="colorAccent">#d4bc44</color>
-    <color name="colorO.C">#ec4141</color>
+    <color name="color_create">#FF8F00</color>
+    <color name="color_food">#d81b60</color>
+    <color name="color_sleep">#5e35b1</color>
+    <color name="color_play">#f44336</color>
+    <color name="black">#000000</color>
+    <color name="background_material_light">#fafafa</color>
 </resources>

@@ -38,7 +38,7 @@ public class SplashIntro extends AppCompatActivity {
                     finish ();
                 }
                 else {
-                    Intent Game = new Intent ( SplashIntro.this , MainActivity.class );
+                    Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Game.class );
                     startActivity ( Game );
                     finish ();
                 }

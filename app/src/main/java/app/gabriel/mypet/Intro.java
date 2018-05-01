@@ -44,7 +44,7 @@ public class Intro extends AppCompatActivity {
                     editor.apply ();
 
 //                    Toast.makeText ( Intro.this,"Seu pet Não foi criado, adicione um nome",Toast.LENGTH_SHORT ).show ();
-                    Intent game = new Intent ( Intro.this , MainActivity.class );
+                    Intent game = new Intent ( Intro.this , Game.class );
                     startActivity ( game );
                     finish ();
                 }
