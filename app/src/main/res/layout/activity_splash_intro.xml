@@ -10,10 +10,12 @@
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/gifImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:src=""
-        android:layout_alignParentTop="true" />
+        android:layout_height="300dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="84dp"
+        android:src="@drawable/panda"
+        android:layout_alignParentLeft="true" />
 
     <ProgressBar
         android:id="@+id/rodinha"
@@ -22,6 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="88dp" />
+        android:layout_marginBottom="60dp" />
 
 </RelativeLayout>
