@@ -34,21 +34,30 @@ public class SplashIntro extends AppCompatActivity {
             public void run () {
                 SharedPreferences splash = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
 
-                if ( splash.getString ( "name" , pet.getName () ) == null ) {
+                if ( splash.getString ( "name" , pet.getName () ) == null && splash.getString ( "type" , pet.getType () ) == null ) {
                     Intent Intro = new Intent ( SplashIntro.this , Intro.class );
                     startActivity ( Intro );
                     finish ();
                 }
-                else if(splash.getString ( "type" , pet.getType () ) == ( "dog" )) {
+
+                else if ( splash.getString ( "type" , pet.getType () ) == "dog" ) {
                     Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Animals.Game_dog.class );
                     startActivity ( Game );
                     finish ();
                 }
-                else if(splash.getString ( "type",pet.getType () ) == ( "cat" )){
+
+                else {
                     Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Animals.Game_cat.class );
                     startActivity ( Game );
                     finish ();
                 }
+
+//                else if(splash.getString ( "type",pet.getType () ) ==  "cat"  && splash.getString ( "name",pet.getName () ) != null){
+//                    Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Animals.Game_cat.class );
+//                    startActivity ( Game );
+//                    finish ();
+//                }
+
             }
 
         } , 1500 );
