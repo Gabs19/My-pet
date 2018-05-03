@@ -5,15 +5,14 @@ public class Pet {
 
     private String name;
     private int age;
+    private String type;
     private float weight;
     private int Hapyness;
     private int id;
 //    private boolean live;
 
     public Pet () {
-        this.weight = 50;
         this.age = 1;
-        this.Hapyness = 25;
     }
 
     public String getName () {
@@ -54,6 +53,14 @@ public class Pet {
 
     public void setId (int id) {
         this.id = id;
+    }
+
+    public String getType () {
+        return type;
+    }
+
+    public void setType (String type) {
+        this.type = type;
     }
 
     //

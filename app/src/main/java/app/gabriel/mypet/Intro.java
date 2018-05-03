@@ -7,7 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.Toast;
+
+import app.gabriel.mypet.Animals.Game_cat;
+import app.gabriel.mypet.Animals.Game_dog;
 
 
 public class Intro extends AppCompatActivity {
@@ -27,13 +32,16 @@ public class Intro extends AppCompatActivity {
 
         name = ( TextInputLayout ) findViewById ( R.id.input_name );
 
+        final RadioButton dog = ( RadioButton ) findViewById ( R.id.dog );
+        final RadioButton cat = ( RadioButton ) findViewById ( R.id.cat );
+
         btnCreate.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick (View v) {
                 pet.setName ( name.getEditText ().getText ().toString ().trim () );
 
                 if ( pet.getName () == null ) {
-                    Toast.makeText ( Intro.this , "Mano da um nome ao seu pet > ", Toast.LENGTH_SHORT ).show ();
+                    Toast.makeText ( Intro.this , "Mano da um nome ao seu pet > " , Toast.LENGTH_SHORT ).show ();
 
                 }
                 else {
@@ -41,12 +49,24 @@ public class Intro extends AppCompatActivity {
                     SharedPreferences.Editor editor = intro.edit ();
 
                     editor.putString ( "name" , pet.getName () );
-                    editor.apply ();
 
-//                    Toast.makeText ( Intro.this,"Seu pet Não foi criado, adicione um nome",Toast.LENGTH_SHORT ).show ();
-                    Intent game = new Intent ( Intro.this , Game.class );
-                    startActivity ( game );
-                    finish ();
+
+                    if ( dog.isChecked () ) {
+                        pet.setType ( "dog" );
+                        Intent gameDog = new Intent ( Intro.this , Game_dog.class );
+                        startActivity ( gameDog );
+                        finish ();
+                    }
+                    if ( cat.isChecked () ) {
+                        pet.setType ("cat");
+                        Intent gameCat = new Intent ( Intro.this , Game_cat.class );
+                        startActivity ( gameCat );
+                        finish ();
+                    }
+
+                    editor.putString ( "type" , pet.getType () );
+
+                    editor.apply ();
                 }
             }
         } );

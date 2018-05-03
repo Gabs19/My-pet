@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
+import app.gabriel.mypet.Logica.Game;
+
 public class SplashIntro extends AppCompatActivity {
 
     private static final String PREF_NAME = "PetPreferences";
@@ -37,14 +39,19 @@ public class SplashIntro extends AppCompatActivity {
                     startActivity ( Intro );
                     finish ();
                 }
-                else {
-                    Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Game.class );
+                else if(splash.getString ( "type" , pet.getType () ) == ( "dog" )) {
+                    Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Animals.Game_dog.class );
+                    startActivity ( Game );
+                    finish ();
+                }
+                else if(splash.getString ( "type",pet.getType () ) == ( "cat" )){
+                    Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Animals.Game_cat.class );
                     startActivity ( Game );
                     finish ();
                 }
             }
 
-        } , 5000 );
+        } , 1500 );
 
     }
 }

@@ -38,10 +38,35 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="87dp"
+        android:layout_marginBottom="48dp"
         android:background="@color/color_create"
-        android:textColor="@color/black"
-        android:text="Criando seu PEt" />
+        android:text="Criando seu PEt"
+        android:textColor="@color/black" />
+
+    <RadioGroup
+        android:layout_width="299dp"
+        android:layout_height="73dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="117dp">
+
+        <RadioButton
+            android:id="@+id/dog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cachorro" />
+
+        <RadioButton
+            android:id="@+id/cat"
+            android:layout_width="84dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="210dp"
+            android:layout_marginTop="-50dp"
+            android:layout_weight="1"
+            android:text="Gato" />
+
+    </RadioGroup>
 
 
 </RelativeLayout>
