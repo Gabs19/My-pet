@@ -9,10 +9,12 @@ public class Pet {
     private float weight;
     private int Hapyness;
     private int id;
+    private int hungry;
 //    private boolean live;
 
     public Pet () {
         this.age = 1;
+        this.hungry = 15;
     }
 
     public String getName () {
@@ -61,6 +63,14 @@ public class Pet {
 
     public void setType (String type) {
         this.type = type;
+    }
+
+    public int getHungry () {
+        return hungry;
+    }
+
+    public void setHungry (int fome) {
+        this.hungry = fome;
     }
 
     //

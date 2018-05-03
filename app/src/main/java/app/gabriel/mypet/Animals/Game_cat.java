@@ -1,5 +1,6 @@
 package app.gabriel.mypet.Animals;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import app.gabriel.mypet.PetDie;
 import app.gabriel.mypet.Pets.Cat;
 import app.gabriel.mypet.R;
 
@@ -26,7 +28,7 @@ public class Game_cat extends AppCompatActivity {
     private TextView weight;
     private TextView name;
 
-    Cat pet = new Cat();
+    Cat pet = new Cat ();
 
     NumberFormat formatD = new DecimalFormat ( "0.2" );
 
@@ -35,7 +37,8 @@ public class Game_cat extends AppCompatActivity {
         super.onCreate ( savedInstanceState );
         setContentView ( R.layout.activity_game_cat );
 
-        SharedPreferences game = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
+        final SharedPreferences cat = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
+        final SharedPreferences.Editor cat_editor = cat.edit ();
 
         name = ( TextView ) findViewById ( R.id.name );
         age = ( TextView ) findViewById ( R.id.age );
@@ -46,36 +49,36 @@ public class Game_cat extends AppCompatActivity {
         btnSpleep = ( FloatingActionButton ) findViewById ( R.id.btn_sleep );
         btnGame = ( FloatingActionButton ) findViewById ( R.id.btn_play );
 
-        name.setText ( game.getString ( "name" , pet.getName () ) );
+        name.setText ( cat.getString ( "name" , pet.getName () ) );
 
-        age.setText ( String.valueOf ( "Idade do seu pet : " + game.getInt ( "age" , pet.getAge () ) ) );
+        age.setText ( String.valueOf ( "Idade do seu pet : " + cat.getInt ( "age" , pet.getAge () ) ) );
 
-        weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( game.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
+        weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( cat.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
 
-        happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + game.getInt ( "hapyness" , pet.getHapyness () ) ) );
+        happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + cat.getInt ( "hapyness" , pet.getHapyness () ) ) );
 
 
+        /*PS - dormir, brincar e comer aumentam a felicidade, porém como gatos gostam mais de dormir. A ação de dormir o deixará mais feliz*/
 
-        /*PS - dormir, brincar e comer aumentam a felicidade*/
+        /* botão que diminui a fome e aumenta o peso de acordo com quantidade de comida*/
 
-        /* botão que aumenta o peso de acordo com quantidade de comida*/
         btnFodd.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick (View v) {
 
-                SharedPreferences food = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
-                SharedPreferences.Editor food_editor = food.edit ();
-
-                pet.setWeight ( pet.getWeight () + 5 );
-                food_editor.putFloat ( "weight" , pet.getWeight () );
+                pet.setWeight ( pet.getWeight () + 1 );
+                cat_editor.putFloat ( "weight" , pet.getWeight () );
 
                 pet.setHapyness ( pet.getHapyness () + 1 );
-                food_editor.putInt ( "hapyness" , pet.getHapyness () );
+                cat_editor.putInt ( "hapyness" , pet.getHapyness () );
 
-                food_editor.commit ();
+                pet.setHungry ( pet.getHungry () - 1 );
+                cat_editor.putInt ( "hungry" , pet.getHungry () );
 
-                happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + food.getInt ( "hapyness" , pet.getHapyness () ) ) );
-                weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( food.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
+                cat_editor.apply ();
+
+                happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + cat.getInt ( "hapyness" , pet.getHapyness () ) ) );
+                weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( cat.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
 
             }
         } );
@@ -91,31 +94,38 @@ public class Game_cat extends AppCompatActivity {
 
         /* botão que controla a felicidade dependendo das brincadeiras */
 
-
         btnGame.setOnClickListener ( new View.OnClickListener () {
             @Override
             public void onClick (View v) {
+
                 pet.setHapyness ( pet.getHapyness () + 1 );
+                cat_editor.putInt ( "hapyness" , pet.getHapyness () );
 
                 float half = ( float ) 1.5;
 
-                SharedPreferences happy = getSharedPreferences ( PREF_NAME , MODE_PRIVATE );
-                SharedPreferences.Editor happy_Editor = happy.edit ();
-
-                happy_Editor.putInt ( "hapyness" , pet.getHapyness () );
-
-
-                if ( happy.getFloat ( "weight" , pet.getWeight () ) > 0 ) {
+                if ( cat.getFloat ( "weight" , pet.getWeight () ) > 0 ) {
                     pet.setWeight ( pet.getWeight () / half );
-                    happy_Editor.putFloat ( "weight" , pet.getWeight () );
+                    cat_editor.putFloat ( "weight" , pet.getWeight () );
 
-                    happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + happy.getInt ( "hapyness" , pet.getHapyness () ) ) );
-                    weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( happy.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
+                    pet.setHungry ( pet.getHungry () + 1 );
+                    cat_editor.putInt ( "hungry" , pet.getHungry () );
 
+                    happyness.setText ( String.valueOf ( "Nivel de Felicidade : " + cat.getInt ( "hapyness" , pet.getHapyness () ) ) );
+                    weight.setText ( String.valueOf ( "Seu pet Pesa : " + formatD.format ( cat.getFloat ( "weight" , pet.getWeight () ) ) + "/kg" ) );
                 }
 
-                happy_Editor.apply ();
+                cat_editor.apply ();
             }
         } );
+
+        if ( cat.getInt ( "hapyness" , pet.getHapyness () ) <= 0 || cat.getInt ( "hungry" , pet.getHungry () ) >= 50 ) {
+
+            cat_editor.clear().apply ();
+
+            Intent cat_die  = new Intent ( Game_cat.this, PetDie.class );
+            startActivity ( cat_die );
+            finish ();
+
+        }
     }
 }

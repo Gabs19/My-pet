@@ -16,12 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Intro"
-            android:noHistory="true" />
-        <activity android:name=".Animals.Game_dog" />
-        <activity android:name=".Animals.Game_cat" />
-        <activity android:name=".Logica.Game"></activity>
+        <activity android:name=".Intro" android:noHistory="true" />
+        <activity android:name=".Animals.Game_dog" android:noHistory="true"/>
+        <activity android:name=".Animals.Game_cat" android:noHistory="true"/>
+        <activity android:name=".Logica.Game" />
+        <activity android:name=".PetDie"></activity>
     </application>
 
 </manifest>
