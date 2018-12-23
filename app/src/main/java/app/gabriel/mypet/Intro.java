@@ -11,8 +11,8 @@ import android.widget.RadioButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import app.gabriel.mypet.Animals.Game_cat;
-import app.gabriel.mypet.Animals.Game_dog;
+
+import app.gabriel.mypet.Logica.Game;
 
 
 public class Intro extends AppCompatActivity {
@@ -53,13 +53,13 @@ public class Intro extends AppCompatActivity {
 
                     if ( dog.isChecked () ) {
                         pet.setType ( "dog" );
-                        Intent gameDog = new Intent ( Intro.this , Game_dog.class );
+                        Intent gameDog = new Intent ( Intro.this , Game.class);
                         startActivity ( gameDog );
                         finish ();
                     }
                     if ( cat.isChecked () ) {
                         pet.setType ("cat");
-                        Intent gameCat = new Intent ( Intro.this , Game_cat.class );
+                        Intent gameCat = new Intent ( Intro.this , Game.class);
                         startActivity ( gameCat );
                         finish ();
                     }

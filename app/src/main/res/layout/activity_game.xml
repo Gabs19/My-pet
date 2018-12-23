@@ -51,13 +51,15 @@
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/btn_sleep"
-        android:layout_marginTop="46dp"
+        android:layout_alignLeft="@+id/btn_sleep"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="48dp"
         android:paddingLeft="10dp"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_alignLeft="@+id/btn_sleep" />
+        android:textStyle="bold" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btn_food"
@@ -96,5 +98,13 @@
         android:clickable="true"
         app:backgroundTint="@color/color_play"
         app:srcCompat="@mipmap/ic_game" />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="88dp" />
 
 </RelativeLayout>

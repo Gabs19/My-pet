@@ -40,14 +40,8 @@ public class SplashIntro extends AppCompatActivity {
                     finish ();
                 }
 
-                else if ( splash.getString ( "type" , pet.getType () ) == "dog" ) {
-                    Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Animals.Game_dog.class );
-                    startActivity ( Game );
-                    finish ();
-                }
-
                 else {
-                    Intent Game = new Intent ( SplashIntro.this , app.gabriel.mypet.Animals.Game_cat.class );
+                    Intent Game = new Intent ( SplashIntro.this , Game.class );
                     startActivity ( Game );
                     finish ();
                 }

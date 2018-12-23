@@ -1,5 +1,6 @@
 package app.gabriel.mypet.Logica;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +12,8 @@ import android.widget.Toast;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
-import app.gabriel.mypet.Animals.Game_dog;
 import app.gabriel.mypet.Pet;
-import app.gabriel.mypet.Pets.Dog;
+import app.gabriel.mypet.PetDie;
 import app.gabriel.mypet.R;
 
 public class Game extends AppCompatActivity {
@@ -28,6 +28,7 @@ public class Game extends AppCompatActivity {
     private TextView happyness;
     private TextView weight;
     private TextView name;
+    private TextView type;
 
     Pet pet = new Pet ();
 
@@ -53,10 +54,12 @@ public class Game extends AppCompatActivity {
         animals.putInt ( "hapyness",pet.getHapyness () );
         animals.putFloat ( "weight", pet.getWeight () );
 
+
         animals.apply ();
 
 
         name = ( TextView ) findViewById ( R.id.name );
+        type = (TextView) findViewById(R.id.type);
         age = ( TextView ) findViewById ( R.id.age );
         weight = ( TextView ) findViewById ( R.id.weight );
         happyness = ( TextView ) findViewById ( R.id.feeling );
@@ -66,6 +69,8 @@ public class Game extends AppCompatActivity {
         btnGame = ( FloatingActionButton ) findViewById ( R.id.btn_play );
 
         name.setText ( game.getString ( "name" , pet.getName () ) );
+
+        type.setText(game.getString("type", pet.getType()));
 
         age.setText ( String.valueOf ( "Idade do seu pet : " + game.getInt ( "age" , pet.getAge () ) ) );
 
@@ -135,5 +140,16 @@ public class Game extends AppCompatActivity {
                 happy_Editor.apply ();
             }
         } );
+
+
+
+        if( game.getFloat("weight", pet.getWeight()) <= 15){
+            animals.clear().apply();
+            Intent pet_die = new Intent(Game.this,PetDie.class);
+            startActivity(pet_die);
+            finish();
+
+
+        }
     }
 }
